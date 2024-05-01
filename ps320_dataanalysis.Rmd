@@ -1,0 +1,69 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message=FALSE, warning = FALSE,
+                      fig.height = 3,
+                      error = TRUE)
+library(tidyverse)
+library(dplyr)
+library(readxl)
+```
+
+```{r}
+weo_ultimate = read_excel("WEO_Data_All.xlsx")
+weo_ultimate
+```
+
+```{r}
+ggplot(weo_ultimate, aes(x = Year, y = Value, color = Publication_Date, group = Publication_Date)) +
+  geom_line() +
+  geom_point() +
+  ggtitle("UAE % Actual GDP Change", subtitle = "2010-2028") +
+  ylab("Percentage") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
+```
+
+```{r}
+weo_projected = read_excel("WEO_Data_projected_datafied.xlsx")
+weo_projected
+```
+
+```{r}
+ggplot(weo_projected, aes(x = Year, y = Value, color = Publication_Date, group = Publication_Date)) +
+  geom_line() +
+  geom_point() +
+  ggtitle("UAE % Projected GDP Change", subtitle = "2011-2028") +
+  ylab("Percentage") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
+```
+
+```{r}
+weo_actual = read_excel("WEO_Data_actual_datafied.xlsx")
+weo_actual
+```
+
+```{r}
+ggplot(weo_actual, aes(x = Year, y = Value, color = Publication_Date, group = Publication_Date)) +
+  geom_line() +
+  geom_point() +
+  ggtitle("UAE % Actual GDP Change", subtitle = "2010-2023") +
+  ylab("Percentage") +
+  scale_x_continuous(breaks = weo_actual$Year, labels = weo_actual$Year) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
+```
+
+```{r}
+weo_oct = read_excel("October_Actual_Projections.xlsx")
+weo_oct
+```
+
+```{r}
+ggplot(weo_oct, aes(x = time_frame, y = October_2023, color = time_frame)) +
+  geom_line() +
+  geom_point() +
+  ggtitle("UAE % Actual GDP Change", subtitle = "2010-2023") +
+  scale_x_continuous(breaks = weo_oct$time_frame, labels = weo_oct$time_frame) +
+  xlab("Year") +
+  ylab("Percentage") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1), legend.position = "none")
+```
+
